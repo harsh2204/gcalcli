@@ -484,6 +484,8 @@ class GoogleCalendarInterface:
         else:
             # week titlebar
             # month title bottom takes care of this when cmd='calm'
+            if type(week_top) != str:
+                week_top = week_top.decode("utf-8")
             self.printer.msg(week_top + '\n', color_border)
 
         # weekday labels
@@ -495,6 +497,10 @@ class GoogleCalendarInterface:
             self.printer.msg(day_name, self.options['color_date'])
             self.printer.art_msg('vrt', color_border)
 
+        if type(week_divider) != str:
+            week_divider = week_divider.decode("utf-8")
+        if type(week_bottom) != str:
+            week_bottom= week_bottom.decode("utf-8")
         self.printer.msg('\n' + week_divider + '\n', color_border)
         cur_month = start_datetime.strftime('%b')
 
@@ -547,6 +553,8 @@ class GoogleCalendarInterface:
                 # stop when everything has been printed
                 done = True
                 self.printer.art_msg('vrt', color_border)
+                if type(empty_day) == str:
+                    empty_day = empty_day.encode("utf-8")
                 for j in range(days):
                     if not week_events[j]:
                         # no events today

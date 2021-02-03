@@ -61,15 +61,15 @@ class Printer(object):
                 'black': '${color black}' if conky else '\033[0;30m',
                 'brightblack': '${color black}' if conky else '\033[30;1m',
                 'red': '${color red}' if conky else '\033[0;31m',
-                'brightred': '${color red}' if conky else '\033[31;1m',
+                'brightred': '${color3}' if conky else '\033[31;1m',
                 'green': '${color green}' if conky else '\033[0;32m',
-                'brightgreen': '${color green}' if conky else '\033[32;1m',
+                'brightgreen': '${color1}' if conky else '\033[32;1m',
                 'yellow': '${color yellow}' if conky else '\033[0;33m',
-                'brightyellow': '${color yellow}' if conky else '\033[33;1m',
+                'brightyellow': '${color2}' if conky else '\033[33;1m',
                 'blue': '${color blue}' if conky else '\033[0;34m',
                 'brightblue': '${color blue}' if conky else '\033[34;1m',
                 'magenta': '${color magenta}' if conky else '\033[0;35m',
-                'brightmagenta': '${color magenta}' if conky else '\033[35;1m',
+                'brightmagenta': '${color4}' if conky else '\033[35;1m',
                 'cyan': '${color cyan}' if conky else '\033[0;36m',
                 'brightcyan': '${color cyan}' if conky else '\033[36;1m',
                 'white': '${color white}' if conky else '\033[0;37m',
@@ -85,6 +85,8 @@ class Printer(object):
 
     def msg(self, msg, colorname='default', file=sys.stdout):
         if self.use_color:
+            if type(msg) != str:
+                msg = msg.decode('utf-8')
             msg = self.colors[colorname] + msg + self.colors['default']
         file.write(msg)
 
